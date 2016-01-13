@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_photo_library"
+            android:title="Profile Picture" />
+        <item
+            android:id="@+id/account"
+            android:icon="@drawable/ic_account_circle"
+            android:title="Account"
+            android:checked="true"/>
+        <item
+            android:id="@+id/subjects"
+            android:icon="@drawable/ic_assignment"
+            android:title="Subjects" />
+        <item
+            android:id="@+id/grades"
+            android:icon="@drawable/ic_grade"
+            android:title="Grades" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_info"
+            android:title="About App" />
+
+    </group>
+
+</menu>

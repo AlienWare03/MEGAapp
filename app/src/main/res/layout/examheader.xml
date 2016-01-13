@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="168dp"
+    android:background="#0288D1"
+    >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/subjecticon"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="80dp"
+            android:id="@+id/subjectLogo"
+            />
+        <TextView
+            android:id="@+id/subjectTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="100dp"
+            android:textColor="#FFFF"
+            android:text="Laws  and Ethics"
+            android:textSize="26sp"
+            android:textStyle="bold"
+
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MEGA App</string>
+    <string name="action_settings">Log Out</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_navigation">Account</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="error_timeout">Oops! Your Connection Timed Out</string>
+    <string name="error_auth_failure">Oops! The Server Says It Doesn\'t Recognize You</string>
+    <string name="error_network">Oops! The Server Just Messed Up</string>
+    <string name="error_parser">Oops! Data Received Was Unreadable </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_subjects">Subjects</string>
+    <string name="title_activity_scores">Scores</string>
+</resources>
