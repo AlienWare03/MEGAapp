@@ -62,8 +62,6 @@ public class MainFragment extends Fragment {
     //student id to use in ?phpid=
     private String studentNumber;
 
-    public String stringSubject;
-
     //textview
     public TextView subjectName;
 
@@ -140,7 +138,6 @@ public class MainFragment extends Fragment {
 
                 if (child != null && mGestureDetector.onTouchEvent(e)) {
                     int itemposition = rv.getChildAdapterPosition(child);
-                    //stringSubject = subjectName.getText().toString();
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt(Config.SUBJECT, itemposition);
                     editor.apply();
