@@ -111,7 +111,6 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         public TextView textViewSlash;
         public TextView textViewItems;
         public TextView textViewPercent;
-        public TextView textViewPercentSign;
         public CircleImageView imageView;
         public TextView subjectTitle;
 
@@ -126,7 +125,6 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
                 textViewSlash = (TextView) itemView.findViewById(R.id.textViewSlash);
                 textViewItems = (TextView) itemView.findViewById(R.id.textViewItems);
                 textViewPercent = (TextView) itemView.findViewById(R.id.textViewPercent);
-                //textViewPercentSign = (TextView) itemView.findViewById(R.id.textViewPercentSign);
                 Holderid = 1;
             }
             else {

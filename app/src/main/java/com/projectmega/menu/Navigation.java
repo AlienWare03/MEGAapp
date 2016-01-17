@@ -103,9 +103,7 @@ public class Navigation extends AppCompatActivity {
 
         Class fragmentClass;
         switch(menuItem.getItemId()) {
-            case R.id.profile:
-                fragmentClass = MainFragment.class;
-                break;
+
             case R.id.account:
                 fragmentClass = AccountFragment.class;
                 break;
@@ -114,6 +112,9 @@ public class Navigation extends AppCompatActivity {
                 break;
             case R.id.about:
                 fragmentClass = AboutFragment.class;
+                break;
+            case R.id.grades:
+                fragmentClass = GradeFragment.class;
                 break;
             default:
                 fragmentClass = AccountFragment.class;
@@ -172,6 +173,10 @@ public class Navigation extends AppCompatActivity {
         if (id == R.id.menuLogout) {
             //calling logout method when the logout button is clicked
             logout();
+        }
+        else if (id == R.id.updateInfo) {
+            Intent intent = new Intent(Navigation.this,UpdateAccount.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

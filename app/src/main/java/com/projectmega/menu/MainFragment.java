@@ -100,7 +100,6 @@ public class MainFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(itemDecoration);
-        subjectName = (TextView) v.findViewById(R.id.textViewSubject);
 
 
         //Initializing the subject list

@@ -59,7 +59,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         buttonRegister.setOnClickListener(this);
     }
     private void register() throws JSONException{
-        //Getting values grom editText
+        //Getting values from editText
         final String studentnum = editTextStudent.getText().toString().trim();
         final String username = editTextUser1.getText().toString().trim();
         final String password = editTextPassword1.getText().toString().trim();

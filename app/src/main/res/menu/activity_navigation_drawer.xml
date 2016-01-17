@@ -4,10 +4,6 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/profile"
-            android:icon="@drawable/ic_photo_library"
-            android:title="Profile Picture" />
-        <item
             android:id="@+id/account"
             android:icon="@drawable/ic_account_circle"
             android:title="Account"

@@ -11,13 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,7 +27,6 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,17 +35,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Exam extends AppCompatActivity {
+public class FinalGrades extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeContainer;
     //Creating a List of superheroes
-    private List<ExamsList> listExams;
-    
-    //Crating Views
+    private List<GradeList> listGrades;
+
+    //Creating Views
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.ItemDecoration itemDecoration;
 
     //Volley Request Queue
     private RequestQueue requestQueue;
@@ -58,24 +53,24 @@ public class Exam extends AppCompatActivity {
     private int pos;
     private String posKey = "&pos=";
 
-    //declaring studentnum
+    //student id to use in ?phpid=
     private String studentNumber;
 
+    //SharedPreferences
+    public SharedPreferences sharedPreferences;
+
+    private String nodata = "Not yet Available";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exam);
+        setContentView(R.layout.activity_final_grades);
 
-        SharedPreferences sharedPreferences = Exam.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        pos = sharedPreferences.getInt(Config.SUBJECT, 0);
-
-        //Getting the Student number
+        SharedPreferences sharedPreferences = FinalGrades.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        pos = sharedPreferences.getInt(Config.SUBJECT1, 0);
         studentNumber = sharedPreferences.getString(Config.STUDENT_NUMBER, "Not Available");
-        
-        //examSubject.setText(String.valueOf(pos));
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipe_containerExam);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipe_containerGrade);
         swipeContainer.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -89,16 +84,13 @@ public class Exam extends AppCompatActivity {
         });
 
         //Initializing Views
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewExam);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewGrade);
         recyclerView.setHasFixedSize(true);
-        itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(itemDecoration);
 
-
-        //Initializing the Exams list
-        listExams = new ArrayList<>();
+        //Initializing the subject list
+        listGrades = new ArrayList<>();
 
         requestQueue = VolleySingleton.getInstance().getRequestQueue();
 
@@ -106,11 +98,10 @@ public class Exam extends AppCompatActivity {
         getData();
 
         //initializing our adapter
-        adapter = new ExamAdapter(listExams, this);
+        adapter = new GradesAdapter(listGrades, this);
 
         //Adding adapter to recyclerview
         recyclerView.setAdapter(adapter);
-
     }
 
     //This method will get data from the web api
@@ -122,30 +113,21 @@ public class Exam extends AppCompatActivity {
     }
 
     private JsonArrayRequest getDataFromServer(int pos) {
-        //Initializing progressbar
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
-
-        //Displaying Progressbar
-        progressBar.setVisibility(View.VISIBLE);
-        setProgressBarIndeterminateVisibility(true);
 
 
         //JsonArrayRequest of volley
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Config.SCORE_URL + studentNumber + posKey + String.valueOf(pos),
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Config.GRADE_URL + studentNumber + posKey + String.valueOf(pos),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         //Calling method parseData to parse the json response
-                        listExams.clear();
+                        listGrades.clear();
                         parseData(response);
-                        //Hiding the progressbar
-                        progressBar.setVisibility(View.GONE);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        progressBar.setVisibility(View.GONE);
                         //If an error occurs that means end of the list has reached
                         //Toast.makeText(Exam.this, error.toString().trim(), Toast.LENGTH_LONG).show();
                         handleVolleyError(error);
@@ -159,7 +141,7 @@ public class Exam extends AppCompatActivity {
     //handles Error
     private void handleVolleyError(VolleyError error) {
         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-            Toast.makeText(this,R.string.error_timeout,Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.error_timeout, Toast.LENGTH_LONG).show();
 
         } else if (error instanceof AuthFailureError) {
             Toast.makeText(this,R.string.error_auth_failure,Toast.LENGTH_LONG).show();
@@ -176,23 +158,19 @@ public class Exam extends AppCompatActivity {
     private void parseData(JSONArray array) {
         for (int i = 0; i < array.length(); i++) {
             //Creating the exam object
-            ExamsList exam = new ExamsList();
+           GradeList gradeList = new GradeList();
             JSONObject json = null;
             try {
                 //Getting json
                 json = array.getJSONObject(i);
                 //Adding data to the exam object
-                exam.setSubjectTitle(json.getString(Config.TAG_SUBJECT_TITLE));
-                exam.setExamName(json.getString(Config.TAG_EXAM_NAME));
-                exam.setExamScore(json.getString(Config.TAG_SCORE));
-                exam.setExamItems(json.getString(Config.TAG_ITEMS));
-                exam.setExamPercent(json.getString(Config.TAG_PERCENT));
+                gradeList.setFinalGrade(json.getString(Config.TAG_GRADE));
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             //Adding the exam object to the list
-            listExams.add(exam);
+            listGrades.add(gradeList);
         }
 
         //Notifying the adapter that data has been added or changed
@@ -220,7 +198,7 @@ public class Exam extends AppCompatActivity {
                         //Saving the sharedpreferences
                         editor.commit();
                         //Starting login activity
-                        Intent intent = new Intent(Exam.this, MainActivity.class);
+                        Intent intent = new Intent(FinalGrades.this, MainActivity.class);
                         startActivity(intent);
                     }
                 });
@@ -254,12 +232,9 @@ public class Exam extends AppCompatActivity {
             logout();
         }
         else if (id == R.id.updateInfo) {
-            Intent intent = new Intent(Exam.this,UpdateAccount.class);
+            Intent intent = new Intent(FinalGrades.this,UpdateAccount.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }
