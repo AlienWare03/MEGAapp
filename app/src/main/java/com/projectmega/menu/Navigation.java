@@ -153,7 +153,8 @@ public class Navigation extends AppCompatActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            moveTaskToBack(true);
+            drawer.openDrawer(GravityCompat.START);
+            //moveTaskToBack(true);
         }
     }
 

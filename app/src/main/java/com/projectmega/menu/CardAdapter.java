@@ -17,6 +17,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     private Context context;
 
+    private String nodata = "Not Available";
+
     //List to store Subjects
     List<SubjectList> subjectLists;
 
@@ -43,8 +45,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         //Getting the particular item from the list
         SubjectList subjectList = subjectLists.get(position);
 
-        //Showing data on the views
-        holder.textViewSubject.setText(subjectList.getSubjectName());
+        String test = subjectList.getSubjectName();
+        if (test =="null"){
+            holder.textViewSubject.setText(nodata);
+        }
+        else {
+            //Showing data on the views
+            holder.textViewSubject.setText(subjectList.getSubjectName());
+        }
+
     /*
         holder.textViewSubject.setOnClickListener(clickListener);
         holder.textViewSubject.setTag(holder);

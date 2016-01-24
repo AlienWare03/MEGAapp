@@ -31,6 +31,8 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
     private String sectionLabel = "Section";
     private String emailLabel = "Email";
 
+    private String nodata = "";
+
     public SharedPreferences sharedPreferences;
 
     List<AccountList> accountLists;
@@ -104,16 +106,26 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
             holder.textViewLabel6.setText(sectionLabel);
             holder.textViewLabel7.setText(emailLabel);
 
-            String userWelcome = userTag + accountList.getUser() + exclamation;
+            String test1 = accountList.getID();
+            String test2 = accountList.getFirst();
+            String test3 = accountList.getMiddle();
+            String test4 = accountList.getLast();
+            String test5 = accountList.getAge();
+            String test6 = accountList.getSection();
+            String test7 = accountList.getEmailadd();
 
-            holder.textViewUser.setText(userWelcome);
-            holder.textViewStudentNum.setText(accountList.getID());
-            holder.textViewFirst.setText(accountList.getFirst());
-            holder.textViewMiddle.setText(accountList.getMiddle());
-            holder.textViewLast.setText(accountList.getLast());
-            holder.textViewAge.setText(accountList.getAge());
-            holder.textViewSection.setText(accountList.getSection());
-            holder.textViewEmail.setText(accountList.getEmailadd());
+           String userWelcome = userTag + accountList.getUser() + exclamation;
+
+                holder.textViewUser.setText(userWelcome);
+                holder.textViewStudentNum.setText(accountList.getID());
+                holder.textViewFirst.setText(accountList.getFirst());
+                holder.textViewMiddle.setText(accountList.getMiddle());
+                holder.textViewLast.setText(accountList.getLast());
+                holder.textViewAge.setText(accountList.getAge());
+                holder.textViewSection.setText(accountList.getSection());
+                holder.textViewEmail.setText(accountList.getEmailadd());
+
+
 
     }
 

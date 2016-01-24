@@ -9,6 +9,7 @@
             android:layout_height="match_parent"
             android:background="#0288D1"
             >
+
         <TextView
             android:id="@+id/finalGradeLabel"
             android:layout_centerHorizontal="true"
@@ -31,6 +32,7 @@
             android:text="1.25"
             android:textSize="120sp"
             />
+
     </RelativeLayout>
 
 </RelativeLayout>

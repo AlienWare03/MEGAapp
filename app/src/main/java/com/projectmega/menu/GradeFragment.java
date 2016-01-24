@@ -136,7 +136,7 @@ public class GradeFragment extends Fragment {
                     editor.apply();
                     Intent intent = new Intent(getActivity().getApplicationContext(), FinalGrades.class);
                     startActivity(intent);
-                    Toast.makeText(getActivity().getApplicationContext(), "The Item Clicked is: " + rv.getChildAdapterPosition(child), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity().getApplicationContext(), "The Item Clicked is: " + rv.getChildAdapterPosition(child), Toast.LENGTH_SHORT).show();
 
                     return true;
 

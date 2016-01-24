@@ -15,6 +15,7 @@ import java.util.List;
 public class GradeSubjectAdapter extends RecyclerView.Adapter<GradeSubjectAdapter.ViewHolder> {
 
     private Context context;
+    private String nodata = "Not Available";
 
     //List to store Subjects
     List<GradeSubjectList> gradeSubjectLists;
@@ -41,8 +42,14 @@ public class GradeSubjectAdapter extends RecyclerView.Adapter<GradeSubjectAdapte
         //Getting the particular item from the list
         GradeSubjectList gradeSubjectList = gradeSubjectLists.get(position);
 
-        //Showing data on the views
-        holder.textViewSubject.setText(gradeSubjectList.getSubjectName());
+        String test = gradeSubjectList.getSubjectName();
+        if (test =="null"){
+            holder.textViewSubject.setText(nodata);
+        }
+        else {
+            //Showing data on the views
+            holder.textViewSubject.setText(gradeSubjectList.getSubjectName());
+        }
     }
 
     @Override

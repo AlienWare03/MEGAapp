@@ -6,19 +6,19 @@ package com.projectmega.menu;
 public class Config {
 
     //URL to our login.php file
-    public static final String LOGIN_URL = "http://192.168.43.166/mega/login.php";
+    public static final String LOGIN_URL = "http://users.projectmega.net//mega/login.php";
     //URL to register
-    public static final String REGISTER_URL = "http://192.168.43.166/mega/register.php";
+    public static final String REGISTER_URL = "http://users.projectmega.net//mega/register.php";
     //URL of API
-    public static final String DATA_URL = "http://192.168.43.166/mega/Subjects.php?id=";
+    public static final String DATA_URL = "http://users.projectmega.net//mega/Subjects.php?id=";
     //URL for getting Scores
-    public static final String SCORE_URL = "http://192.168.43.166/mega/exam.php?id=";
+    public static final String SCORE_URL = "http://users.projectmega.net//mega/exam.php?id=";
     //URL for getting Account Info
-    public static final String ACCOUNT_URL = "http://192.168.43.166/mega/users.php?id=";
+    public static final String ACCOUNT_URL = "http://users.projectmega.net//mega/users.php?id=";
     //URL for parsing data for updates
-    public static final String GET_URL = "http://192.168.43.166/mega/update.php?id=";
+    public static final String GET_URL = "http://users.projectmega.net//mega/update.php?id=";
     //URL for final grade
-    public static final String GRADE_URL = "http://192.168.43.166/mega/finalgrade.php?id=";
+    public static final String GRADE_URL = "http://users.projectmega.net//mega/finalgrade.php?id=";
 
     //Keys for email and password as defined in our $_POST['key'] in login.php
     public static final String KEY_USER = "username";

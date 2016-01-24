@@ -22,10 +22,12 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
                                                 // IF the view under inflation and population is header or Item
     private static final int TYPE_ITEM = 1;
 
-    private int subjectLogo = R.drawable.subjecticon;
+    private int subjectLogo = R.drawable.icon;
     private String slash = "/";
     private String percentSign = "%";
     private String scoreName = "Score:";
+    private String nodata = "Not Available";
+    private String nodata1 = "NA";
 
     List<ExamsList> examsLists;
 
@@ -63,14 +65,54 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
                                                                 // position by 1 and pass it to the holder while setting the text and image
             ExamsList examsList = examsLists.get(position-1);
 
-            holder.textViewExam.setText(examsList.getExamName());
-            holder.textViewScoreName.setText(scoreName);
-            holder.textViewScore.setText(examsList.getExamScore());
-            holder.textViewSlash.setText(slash);
-            holder.textViewItems.setText(examsList.getExamItems());
-            String percent = examsList.getExamPercent() + percentSign;
-            holder.textViewPercent.setText(percent);
-            //holder.textViewPercentSign.setText(percentSign);
+            String test1 = examsList.getExamName();
+            String test2 = examsList.getExamScore();
+            String test3 = examsList.getExamPercent();
+            String test4 = examsList.getExamItems();
+
+            if (test1.equals("")){
+                holder.textViewExam.setText(nodata);
+                holder.textViewScoreName.setText(scoreName);
+                holder.textViewScore.setText(nodata);
+                holder.textViewSlash.setText("");
+                holder.textViewItems.setText("");
+                holder.textViewPercent.setText("");
+            }
+            else if (test2.equals("null")){
+                holder.textViewExam.setText(examsList.getExamName());
+                holder.textViewScoreName.setText(scoreName);
+                holder.textViewScore.setText(nodata);
+                holder.textViewSlash.setText("");
+                holder.textViewItems.setText("");
+                holder.textViewPercent.setText(nodata);
+            }
+            else if (test4.equals("null") || test4.equals("0")){
+                holder.textViewExam.setText(examsList.getExamName());
+                holder.textViewScoreName.setText(scoreName);
+                holder.textViewScore.setText(nodata);
+                holder.textViewSlash.setText("");
+                holder.textViewItems.setText("");
+                holder.textViewPercent.setText(nodata);
+            }
+            else if (test3 == "null"){
+                holder.textViewExam.setText(examsList.getExamName());
+                holder.textViewScoreName.setText(scoreName);
+                holder.textViewScore.setText(nodata);
+                holder.textViewSlash.setText("");
+                holder.textViewItems.setText("");
+                holder.textViewPercent.setText(nodata);
+            }
+            else {
+                holder.textViewExam.setText(examsList.getExamName());
+                holder.textViewScoreName.setText(scoreName);
+                holder.textViewScore.setText(examsList.getExamScore());
+                holder.textViewSlash.setText(slash);
+                holder.textViewItems.setText(examsList.getExamItems());
+                String percent = examsList.getExamPercent() + percentSign;
+                holder.textViewPercent.setText(percent);
+                //holder.textViewPercentSign.setText(percentSign);
+            }
+
 
         }
         else{

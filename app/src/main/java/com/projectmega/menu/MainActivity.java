@@ -19,9 +19,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -122,7 +127,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //You can handle error here if you want
-                        Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                        handleVolleyError(error);
+                        //Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 })
         {
@@ -143,6 +149,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Adding the string request to the queue
         RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
         requestQueue.add(stringRequest);
+    }
+
+    //handles Error
+    private void handleVolleyError(VolleyError error) {
+        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+            Toast.makeText(this,R.string.error_timeout,Toast.LENGTH_LONG).show();
+
+        } else if (error instanceof AuthFailureError) {
+            Toast.makeText(this,R.string.error_auth_failure,Toast.LENGTH_LONG).show();
+        } else if (error instanceof ServerError) {
+            Toast.makeText(this,R.string.error_auth_failure,Toast.LENGTH_LONG).show();
+        } else if (error instanceof NetworkError) {
+            Toast.makeText(this,R.string.error_network,Toast.LENGTH_LONG).show();
+        } else if (error instanceof ParseError) {
+            Toast.makeText(this,R.string.error_parser,Toast.LENGTH_LONG).show();
+        }
     }
     @Override
     public  void onBackPressed(){

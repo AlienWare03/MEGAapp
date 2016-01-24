@@ -122,12 +122,6 @@ public class Exam extends AppCompatActivity {
     }
 
     private JsonArrayRequest getDataFromServer(int pos) {
-        //Initializing progressbar
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
-
-        //Displaying Progressbar
-        progressBar.setVisibility(View.VISIBLE);
-        setProgressBarIndeterminateVisibility(true);
 
 
         //JsonArrayRequest of volley
@@ -139,13 +133,12 @@ public class Exam extends AppCompatActivity {
                         listExams.clear();
                         parseData(response);
                         //Hiding the progressbar
-                        progressBar.setVisibility(View.GONE);
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        progressBar.setVisibility(View.GONE);
                         //If an error occurs that means end of the list has reached
                         //Toast.makeText(Exam.this, error.toString().trim(), Toast.LENGTH_LONG).show();
                         handleVolleyError(error);
@@ -174,7 +167,7 @@ public class Exam extends AppCompatActivity {
 
     //This method will parse json data
     private void parseData(JSONArray array) {
-        for (int i = 0; i < array.length(); i++) {
+        for (int i = 0; i <= array.length(); i++) {
             //Creating the exam object
             ExamsList exam = new ExamsList();
             JSONObject json = null;

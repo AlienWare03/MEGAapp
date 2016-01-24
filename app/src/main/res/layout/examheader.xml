@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="168dp"
-    android:background="#0288D1"
+    android:background="@drawable/_minflat__android_l_wallpaper_moonshine__4k__by_dakoder_d7uzmrv"
     >
     
     <LinearLayout
@@ -14,7 +14,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/subjecticon"
+            android:src="@drawable/icon"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="80dp"
             android:id="@+id/subjectLogo"

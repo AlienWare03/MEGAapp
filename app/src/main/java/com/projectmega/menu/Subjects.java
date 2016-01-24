@@ -140,11 +140,7 @@ public class Subjects extends AppCompatActivity {
 
     private JsonArrayRequest getDataFromServer(int studentid) {
         //Initializing progressbar
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
 
-        //Displaying Progressbar
-        progressBar.setVisibility(View.VISIBLE);
-        setProgressBarIndeterminateVisibility(true);
 
 
         //JsonArrayRequest of volley
@@ -156,13 +152,13 @@ public class Subjects extends AppCompatActivity {
                         listSubjects.clear();
                         parseData(response);
                         //Hiding the progressbar
-                        progressBar.setVisibility(View.GONE);
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        progressBar.setVisibility(View.GONE);
+
                         //If an error occurs that means end of the list has reached
                         Toast.makeText(Subjects.this, error.toString().trim(), Toast.LENGTH_LONG).show();
                     }
